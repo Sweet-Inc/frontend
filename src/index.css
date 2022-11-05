@@ -11,3 +11,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+img-fluid d-block {
+  display: block;
+  width: 100%;
+  height: auto;
+}

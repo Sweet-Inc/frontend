@@ -16,7 +16,7 @@ class CustomSlide extends Component {
   }
 }
 
-export default class Responsive extends Component {
+export default class  Responsive extends Component {
 
   render() {
     var settings = {
@@ -25,7 +25,7 @@ export default class Responsive extends Component {
       slidesToShow: 3,
       slidesToScroll: 1,
       initialSlide: 0,
-      adaptiveHeight: 300,
+      adaptiveHeight: 200,
       responsive: [
         {
           breakpoint: 1900,

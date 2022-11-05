@@ -29,16 +29,15 @@ const slidermain= () => (
           <div className="col-md-6">
               <div className="spacer-single"></div>
               <Reveal className='onStep' keyframes={fadeInUp} delay={0} duration={600} triggerOnce>
-              <h6 className=""><span className="text-uppercase color">Gigaland Market</span></h6>
+              <h6 className=""><span className="text-uppercase color"> Candy Industry</span></h6>
               </Reveal>
               <div className="spacer-10"></div>
               <Reveal className='onStep' keyframes={fadeInUp} delay={300} duration={600} triggerOnce>
-              <h1 className="">Create, sell or collect digital items.</h1>
+              <h1 className="">Beautiful Bulk Candy </h1>
               </Reveal>
               <Reveal className='onStep' keyframes={fadeInUp} delay={600} duration={600} triggerOnce>
               <p className=" lead">
-              Unit of data stored on a digital ledger, called a blockchain, that certifies a digital asset to be unique and therefore not interchangeable
-              </p>
+              It`s bulk and it`s beautiful. Bulk candy in every color...and so much more.</p>
               </Reveal>
               <div className="spacer-10"></div>
               <Reveal className='onStep' keyframes={fadeInUp} delay={800} duration={900} triggerOnce>

@@ -3,6 +3,7 @@ import Breakpoint, { BreakpointProvider, setDefaultBreakpoints } from "react-soc
 import { header } from 'react-bootstrap';
 import { Link } from '@reach/router';
 import useOnclickOutside from "react-cool-onclickoutside";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 setDefaultBreakpoints([
@@ -333,7 +334,12 @@ const Header= function() {
               </BreakpointProvider>
 
               <div className='mainside'>
-                <NavLink to="/wallet" className="btn-main">Connect Wallet</NavLink>
+                <NavLink to="/wallet" className="btn-main" >
+                <span> 
+                <FontAwesomeIcon icon="fas fa-shopping-cart"  color="white"/>
+                </span>
+                 <span>Cart</span>
+                </NavLink>
               </div>
                   
       </div>
