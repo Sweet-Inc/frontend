@@ -724,9 +724,8 @@ a{
     color: rgba(0, 0, 0, .5);
     padding-left: 2px;
     font-size: 8px;
-    top: -1px;
     position: absolute;
-    top: 6px;
+    bottom: 12px;
     right: 5px;
     border: none;
   }
@@ -1033,6 +1032,9 @@ a{
             color: $black;
           }
           h3 {
+            color: $black;
+          }
+          span {
             color: $black;
           }
         }
