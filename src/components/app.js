@@ -36,6 +36,7 @@ import Progressbar from './pages/progressbar';
 import Tabs from './pages/tabs';
 
 import { createGlobalStyle } from 'styled-components';
+import BoxDetail from './box/BoxDetail';
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -102,6 +103,7 @@ const app= () => (
         <Alerts path="/alerts" />
         <Progressbar path="/progressbar" />
         <Tabs path="/tabs" />
+        <BoxDetail path="/boxdetail/:id" />
         </ScrollTop>
       </PosedRouter>
     <ScrollToTopBtn />

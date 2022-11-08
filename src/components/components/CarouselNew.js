@@ -20,8 +20,6 @@ class CustomSlide extends Component {
     return (
       <div {...props}></div>
     );
-
-      
   }
 }
 
@@ -99,15 +97,16 @@ export default class Responsive extends Component {
             <CustomSlide className='itm' index={1}>
             <div className="d-item">
               <div className="nft__item">
-                  <div className="de_countdown">
+                  {/* <div className="de_countdown">
                   <Clock deadline={this.state.deadline} />
-                  </div>
-                  <div className="author_list_pp">
+                  </div> */}
+                  {/* <div className="author_list_pp">
                       <span onClick={()=> window.open("/home1", "_self")}>                                    
                           <img className="lazy" src="./img/author/author-1.jpg" alt=""/>
                           <i className="fa fa-check"></i>
                       </span>
-                  </div>
+                  </div> */}
+
                   <div className="nft__item_wrap" style={{height: `${this.state.height}px`}}>
                     <Outer>
                       <span>
