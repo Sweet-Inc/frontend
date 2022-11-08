@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import Breakpoint, { BreakpointProvider, setDefaultBreakpoints } from "react-socks";
+import React, { useEffect, useState } from 'react';
+import Breakpoint, {
+  BreakpointProvider,
+  setDefaultBreakpoints,
+} from 'react-socks';
 import { header } from 'react-bootstrap';
 import { Link } from '@reach/router';
-import useOnclickOutside from "react-cool-onclickoutside";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useOnclickOutside from 'react-cool-onclickoutside';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
-setDefaultBreakpoints([
-  { xs: 0 },
-  { l: 1199 },
-  { xl: 1200 }
-]);
-
-const NavLink = props => (
+const NavLink = (props) => (
   <Link
     {...props}
     getProps={({ isCurrent }) => {
@@ -25,10 +23,7 @@ const NavLink = props => (
   />
 );
 
-
-
 const Header = function () {
-
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu1, setOpenMenu1] = React.useState(false);
   const [openMenu2, setOpenMenu2] = React.useState(false);
@@ -72,191 +67,318 @@ const Header = function () {
 
   const [showmenu, btn_icon] = useState(false);
   useEffect(() => {
-    const header = document.getElementById("myHeader");
-    const totop = document.getElementById("scroll-to-top");
+    const header = document.getElementById('myHeader');
+    const totop = document.getElementById('scroll-to-top');
     const sticky = header.offsetTop;
-    const scrollCallBack = window.addEventListener("scroll", () => {
+    const scrollCallBack = window.addEventListener('scroll', () => {
       btn_icon(false);
       if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-        totop.classList.add("show");
-
+        header.classList.add('sticky');
+        totop.classList.add('show');
       } else {
-        header.classList.remove("sticky");
-        totop.classList.remove("show");
-      } if (window.pageYOffset > sticky) {
+        header.classList.remove('sticky');
+        totop.classList.remove('show');
+      }
+      if (window.pageYOffset > sticky) {
         closeMenu();
       }
     });
     return () => {
-      window.removeEventListener("scroll", scrollCallBack);
+      window.removeEventListener('scroll', scrollCallBack);
     };
   }, []);
   return (
-    <header id="myHeader" className='navbar white'>
-      <div className='container'>
-        <div className='row w-100-nav'>
-          <div className='logo px-0'>
-            <div className='navbar-title navbar-item'>
+    <header id="myHeader" className="navbar white">
+      <div className="container">
+        <div className="row w-100-nav">
+          <div className="logo px-0">
+            <div className="navbar-title navbar-item">
               <NavLink to="/">
-                <img
-                  src="./img/logo.png"
-                  className="img-fluid d-block"
-                  alt="#"
-                />
-                <img
-                  src="./img/logo-2.png"
-                  className="img-fluid d-3"
-                  alt="#"
-                />
-                <img
-                  src="./img/logo-light.png"
-                  className="img-fluid d-none"
-                  alt="#"
-                />
+                <h3 style={{ lineHeight: 0, marginBottom: 0 }}>
+                  The Candy Company
+                </h3>
               </NavLink>
             </div>
           </div>
 
-          <div className='search'>
-            <input id="quick_search" className="xs-hide" name="quick_search" placeholder="search item here..." type="text" />
+          <div className="search">
+            <input
+              id="quick_search"
+              className="xs-hide"
+              name="quick_search"
+              placeholder="Your favorite candy..."
+              type="text"
+            />
           </div>
 
           <BreakpointProvider>
             <Breakpoint l down>
-              {showmenu &&
-                <div className='menu'>
-                  <div className='navbar-item'>
+              {showmenu && (
+                <div className="menu">
+                  <div className="navbar-item">
                     <div ref={ref}>
-                      <div className="dropdown-custom dropdown-toggle btn"
+                      <div
+                        className="dropdown-custom dropdown-toggle btn"
                         onClick={handleBtnClick}
                       >
                         Candy
                       </div>
                     </div>
                   </div>
-                  <div className='navbar-item'>
+                  <div className="navbar-item">
                     <div ref={ref1}>
-                      <div className="dropdown-custom dropdown-toggle btn"
+                      <div
+                        className="dropdown-custom dropdown-toggle btn"
                         onClick={handleBtnClick1}
                       >
                         Explore
                       </div>
                       {openMenu1 && (
-                        <div className='item-dropdown'>
+                        <div className="item-dropdown">
                           <div className="dropdown" onClick={closeMenu1}>
-                            <NavLink to="/explore" onClick={() => btn_icon(!showmenu)}>Explore</NavLink>
-                            <NavLink to="/explore2" onClick={() => btn_icon(!showmenu)}>Explore 2</NavLink>
-                            <NavLink to="/rangking" onClick={() => btn_icon(!showmenu)}>Rangking</NavLink>
-                            <NavLink to="/colection" onClick={() => btn_icon(!showmenu)}>Collection</NavLink>
-                            <NavLink to="/ItemDetail" onClick={() => btn_icon(!showmenu)}>Items Details</NavLink>
-                            <NavLink to="/Auction" onClick={() => btn_icon(!showmenu)}>Live Auction</NavLink>
-                            <NavLink to="/helpcenter" onClick={() => btn_icon(!showmenu)}>Help Center</NavLink>
+                            <NavLink
+                              to="/explore"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Explore
+                            </NavLink>
+                            <NavLink
+                              to="/explore2"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Explore 2
+                            </NavLink>
+                            <NavLink
+                              to="/rangking"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Rangking
+                            </NavLink>
+                            <NavLink
+                              to="/colection"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Collection
+                            </NavLink>
+                            <NavLink
+                              to="/ItemDetail"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Items Details
+                            </NavLink>
+                            <NavLink
+                              to="/Auction"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Live Auction
+                            </NavLink>
+                            <NavLink
+                              to="/helpcenter"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Help Center
+                            </NavLink>
                           </div>
                         </div>
                       )}
                     </div>
                   </div>
-                  <div className='navbar-item'>
+                  <div className="navbar-item">
                     <div ref={ref2}>
-                      <div className="dropdown-custom dropdown-toggle btn"
+                      <div
+                        className="dropdown-custom dropdown-toggle btn"
                         onClick={handleBtnClick2}
                       >
                         Pages
                       </div>
                       {openMenu2 && (
-                        <div className='item-dropdown'>
+                        <div className="item-dropdown">
                           <div className="dropdown" onClick={closeMenu2}>
-                            <NavLink to="/Author" onClick={() => btn_icon(!showmenu)}>Author</NavLink>
-                            <NavLink to="/wallet" onClick={() => btn_icon(!showmenu)}>Wallet</NavLink>
-                            <NavLink to="/create" onClick={() => btn_icon(!showmenu)}>Create</NavLink>
-                            <NavLink to="/create2" onClick={() => btn_icon(!showmenu)}>Create 2</NavLink>
-                            <NavLink to="/createOptions" onClick={() => btn_icon(!showmenu)}>Create options</NavLink>
-                            <NavLink to="/news" onClick={() => btn_icon(!showmenu)}>News</NavLink>
-                            <NavLink to="/works" onClick={() => btn_icon(!showmenu)}>Gallery</NavLink>
-                            <NavLink to="/login" onClick={() => btn_icon(!showmenu)}>login</NavLink>
-                            <NavLink to="/loginTwo" onClick={() => btn_icon(!showmenu)}>login 2</NavLink>
-                            <NavLink to="/register" onClick={() => btn_icon(!showmenu)}>Register</NavLink>
-                            <NavLink to="/contact" onClick={() => btn_icon(!showmenu)}>Contact Us</NavLink>
+                            <NavLink
+                              to="/Author"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Author
+                            </NavLink>
+                            <NavLink
+                              to="/wallet"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Wallet
+                            </NavLink>
+                            <NavLink
+                              to="/create"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Create
+                            </NavLink>
+                            <NavLink
+                              to="/create2"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Create 2
+                            </NavLink>
+                            <NavLink
+                              to="/createOptions"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Create options
+                            </NavLink>
+                            <NavLink
+                              to="/news"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              News
+                            </NavLink>
+                            <NavLink
+                              to="/works"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Gallery
+                            </NavLink>
+                            <NavLink
+                              to="/login"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              login
+                            </NavLink>
+                            <NavLink
+                              to="/loginTwo"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              login 2
+                            </NavLink>
+                            <NavLink
+                              to="/register"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Register
+                            </NavLink>
+                            <NavLink
+                              to="/contact"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Contact Us
+                            </NavLink>
                           </div>
                         </div>
                       )}
                     </div>
                   </div>
-                  
-                  <div className='navbar-item'>
+
+                  <div className="navbar-item">
                     <NavLink to="/activity" onClick={() => btn_icon(!showmenu)}>
                       Activity
                     </NavLink>
                   </div>
-                  <div className='navbar-item'>
+                  <div className="navbar-item">
                     <div ref={ref3}>
-                      <div className="dropdown-custom dropdown-toggle btn"
+                      <div
+                        className="dropdown-custom dropdown-toggle btn"
                         onClick={handleBtnClick3}
                       >
                         Element
                       </div>
                       {openMenu3 && (
-                        <div className='item-dropdown'>
+                        <div className="item-dropdown">
                           <div className="dropdown" onClick={closeMenu3}>
-                            <NavLink to="/elegantIcons" onClick={() => btn_icon(!showmenu)}>Elegant Icon</NavLink>
-                            <NavLink to="/etlineIcons" onClick={() => btn_icon(!showmenu)}>Etline Icon</NavLink>
-                            <NavLink to="/fontAwesomeIcons" onClick={() => btn_icon(!showmenu)}>Font Awesome Icon</NavLink>
-                            <NavLink to="/accordion" onClick={() => btn_icon(!showmenu)}>Accordion</NavLink>
-                            <NavLink to="/alerts" onClick={() => btn_icon(!showmenu)}>Alerts</NavLink>
-                            <NavLink to="/price" onClick={() => btn_icon(!showmenu)}>Pricing Table</NavLink>
-                            <NavLink to="/progressbar" onClick={() => btn_icon(!showmenu)}>Progress bar</NavLink>
-                            <NavLink to="/tabs" onClick={() => btn_icon(!showmenu)}>Tabs</NavLink>
+                            <NavLink
+                              to="/elegantIcons"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Elegant Icon
+                            </NavLink>
+                            <NavLink
+                              to="/etlineIcons"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Etline Icon
+                            </NavLink>
+                            <NavLink
+                              to="/fontAwesomeIcons"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Font Awesome Icon
+                            </NavLink>
+                            <NavLink
+                              to="/accordion"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Accordion
+                            </NavLink>
+                            <NavLink
+                              to="/alerts"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Alerts
+                            </NavLink>
+                            <NavLink
+                              to="/price"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Pricing Table
+                            </NavLink>
+                            <NavLink
+                              to="/progressbar"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Progress bar
+                            </NavLink>
+                            <NavLink
+                              to="/tabs"
+                              onClick={() => btn_icon(!showmenu)}
+                            >
+                              Tabs
+                            </NavLink>
                           </div>
                         </div>
                       )}
                     </div>
                   </div>
                 </div>
-              }
+              )}
             </Breakpoint>
 
             <Breakpoint xl>
-              <div className='menu'>
-                <div className='navbar-item'>
+              <div className="menu">
+                <div className="navbar-item">
                   <NavLink to="/activity">
                     Candy All
-                    <span className='lines'></span>
+                    <span className="lines"></span>
                   </NavLink>
                 </div>
 
-                <div className='navbar-item'>
+                <div className="navbar-item">
                   <NavLink to="/activity">
                     Candy By Color
-                    <span className='lines'></span>
+                    <span className="lines"></span>
                   </NavLink>
                 </div>
 
-                <div className='navbar-item'>
+                <div className="navbar-item">
                   <NavLink to="/activity">
                     Brands
-                    <span className='lines'></span>
+                    <span className="lines"></span>
                   </NavLink>
                 </div>
-                <div className='navbar-item'>
+                <div className="navbar-item">
                   <NavLink to="/activity">
                     About Us
-                    <span className='lines'></span>
+                    <span className="lines"></span>
                   </NavLink>
                 </div>
               </div>
             </Breakpoint>
           </BreakpointProvider>
 
-          <div className='mainside'>
-            <NavLink to="/wallet" className="btn-main" >
+          <div className="mainside">
+            <NavLink to="/wallet" className="btn-main">
               <span>
-                {/* <FontAwesomeIcon icon="fas fa-shopping-cart"  color="white"/> */}
+                <FontAwesomeIcon icon="fas fa-shopping-cart" color="white" />
               </span>
               <span>Cart</span>
             </NavLink>
           </div>
-
         </div>
 
         {/* <button className="nav-icon" onClick={() => btn_icon(!showmenu)}>
@@ -264,9 +386,9 @@ const Header = function () {
           <div className="menu-line1 white"></div>
           <div className="menu-line2 white"></div>
         </button> */}
-
       </div>
     </header>
   );
-}
+};
+
 export default Header;

@@ -82,6 +82,13 @@ body {
 strong{
   font-weight: bold;
 }
+
+
+.containerSliderMain {
+  h1 {
+    color: #fff;
+  }
+}
 section{
   padding: 90px 0;
   &.no-top{
@@ -785,10 +792,10 @@ a{
     transition: all 0.6s ease;
     &.white{
       a{
-        color: $black;
+        color: $white;
       }
       .btn{
-        color: $black;
+        color: $white;
         .lines{
           top: 24px;
         }
@@ -1004,6 +1011,9 @@ a{
         }
       }
     }
+    h3 {
+      color: $white;
+    }
     &.sticky {
       position: fixed;
       top: 0;
@@ -1011,6 +1021,9 @@ a{
       background: #1b1b1b;
       border-bottom: solid 1px #dddddd;
       transition: all 0.6s ease;
+        input {
+          color: $black;
+        }
         &.white{
           background: $white;
           .btn{
@@ -1019,6 +1032,16 @@ a{
           a{
             color: $black;
           }
+          h3 {
+            color: $black;
+          }
+        }
+
+        .search{
+          #quick_search {
+              color: $black;
+          }
+        
         }
       }
       .search{
@@ -4059,6 +4082,13 @@ img.img-rounded{
     top: 0;
     &.white a{
       color: $gray;
+    }
+  }
+  #mySliderMain .container {
+    color: #fff;
+    h1 {
+      color: #fff;
+
     }
   }
   #myHeader .container {
