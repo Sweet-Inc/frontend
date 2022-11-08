@@ -5,49 +5,31 @@ const footer= () => (
   <footer className="footer-light">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-3 col-sm-6 col-xs-1">
+                    <div className="col-md-4 col-sm-6 col-xs-1">
                         <div className="widget">
-                            <h5>Marketplace</h5>
+                            <h5>About </h5>
                             <ul>
-                                <li><Link to="">All NFTs</Link></li>
-                                <li><Link to="">Art</Link></li>
-                                <li><Link to="">Music</Link></li>
-                                <li><Link to="">Domain Names</Link></li>
-                                <li><Link to="">Virtual World</Link></li>
-                                <li><Link to="">Collectibles</Link></li>
+                                <li>Candy All</li>
+                                <li>Candy By Color</li>
+                                <li>Brands</li>
                             </ul>
                         </div>
                     </div>
-                    <div className="col-md-3 col-sm-6 col-xs-1">
+
+                    <div className="col-md-4 col-sm-6 col-xs-1">
                         <div className="widget">
-                            <h5>Resources</h5>
+                            <h5>More Info</h5>
                             <ul>
-                                <li><Link to="">Help Center</Link></li>
-                                <li><Link to="">Partners</Link></li>
-                                <li><Link to="">Suggestions</Link></li>
-                                <li><Link to="">Discord</Link></li>
-                                <li><Link to="">Docs</Link></li>
-                                <li><Link to="">Newsletter</Link></li>
+                                <li>Contact: 0933755852</li>
+                                <li>Email: TheCandyCompany@gmail.com</li>
+                                <li></li>
+                                <li></li>
                             </ul>
                         </div>
                     </div>
-                    <div className="col-md-3 col-sm-6 col-xs-1">
-                        <div className="widget">
-                            <h5>Community</h5>
-                            <ul>
-                                <li><Link to="">Community</Link></li>
-                                <li><Link to="">Documentation</Link></li>
-                                <li><Link to="">Brand Assets</Link></li>
-                                <li><Link to="">Blog</Link></li>
-                                <li><Link to="">Forum</Link></li>
-                                <li><Link to="">Mailing List</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="col-md-3 col-sm-6 col-xs-1">
+                    <div className="col-md-4 col-sm-6 col-xs-1">
                         <div className="widget">
                             <h5>Newsletter</h5>
-                            <p>Signup for our newsletter to get the latest news in your inbox.</p>
                             <form action="#" className="row form-dark" id="form_subscribe" method="post" name="form_subscribe">
                                 <div className="col text-center">
                                     <input className="form-control" id="txt_subscribe" name="txt_subscribe" placeholder="enter your email" type="text" /> 
@@ -58,11 +40,11 @@ const footer= () => (
                                 </div>
                             </form>
                             <div className="spacer-10"></div>
-                            <small>Your email is safe with us. We don't spam.</small>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div className="subfooter">
                 <div className="container">
                     <div className="row">
@@ -70,9 +52,8 @@ const footer= () => (
                             <div className="de-flex">
                                 <div className="de-flex-col">
                                     <span onClick={()=> window.open("", "_self")}>
-                                        <img alt="" className="f-logo d-1" src="./img/logo.png" />
-                                        <img alt="" className="f-logo d-3" src="./img/logo-2-light.png" />
-                                        <span className="copy">&copy; Copyright 2021 - Gigaland by Designesia</span>
+                                        <h3 style={{fontWeight:700,fontSize:'30px',}}>The Candy Company</h3>
+                                        <span style={{color:'#485460', fontWeight:500}} className="copy">&copy; Copyright 2021 - The Candy Company by Designesia</span>
                                     </span>
                                 </div>
                                 <div className="de-flex-col">
