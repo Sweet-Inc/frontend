@@ -38,6 +38,9 @@ import Tabs from './pages/tabs';
 import { createGlobalStyle } from 'styled-components';
 import BoxDetail from './box/BoxDetail';
 import Admin from '../templates/Admin';
+import Box from './dashboard/Box';
+import Brand from './dashboard/Brand';
+import Category from './dashboard/Category';
 
 const GlobalStyles = createGlobalStyle`
   :root {

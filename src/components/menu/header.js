@@ -80,8 +80,15 @@ const Header = function () {
     }
   };
 
+  const pathnamePatternsToIgnore = [
+    '/admin',
+    '/admin/mgmt/boxes',
+    '/admin/mgmt/brands',
+    '/admin/mgmt/categories',
+  ];
+
   useEffect(() => {
-    if (window.location.pathname === '/admin') return;
+    if (pathnamePatternsToIgnore.includes(window.location.pathname)) return;
 
     const header = document.getElementById('myHeader');
     const totop = document.getElementById('scroll-to-top');

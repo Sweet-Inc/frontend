@@ -18,17 +18,17 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
+import ListItems from './ListItems';
+import BoxMgmt from './Box';
+import Category from './Category';
+import Brand from './Brand';
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        The candy company
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -120,6 +120,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [currentMgmt, setCurrentMgmet] = React.useState('boxes');
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -127,6 +128,24 @@ export default function Dashboard() {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
+  const handleChangeMgmt = (mgmt) => {
+    if (mgmt === currentMgmt) return;
+    setCurrentMgmet(mgmt);
+  };
+
+  const handleRenderMgmt = () => {
+    switch (currentMgmt) {
+      case 'boxes':
+        return <BoxMgmt />;
+      case 'brands':
+        return <Brand />;
+      case 'categories':
+        return <Category />;
+      default:
+        return <Box />;
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -177,31 +196,17 @@ export default function Dashboard() {
           </IconButton>
         </div>
         <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
+        <List>
+          <ListItems handleChangeMgmt={handleChangeMgmt} />
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
             {/* Recent Orders */}
             <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
+              <Paper className={classes.paper}>{handleRenderMgmt()}</Paper>
             </Grid>
           </Grid>
           <Box pt={4}>
