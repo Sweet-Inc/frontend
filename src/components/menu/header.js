@@ -3,10 +3,8 @@ import Breakpoint, {
   BreakpointProvider,
   setDefaultBreakpoints,
 } from 'react-socks';
-import { header } from 'react-bootstrap';
 import { Link } from '@reach/router';
 import useOnclickOutside from 'react-cool-onclickoutside';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // BE (firebase)
 import { getUser } from '../../firebase/data/currentUser';
@@ -32,7 +30,6 @@ const Header = function () {
   const { res } = getUser();
   const { logout, error } = useLogout();
 
-  console.log(res);
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu1, setOpenMenu1] = React.useState(false);
   const [openMenu2, setOpenMenu2] = React.useState(false);
@@ -84,6 +81,8 @@ const Header = function () {
   };
 
   useEffect(() => {
+    if (window.location.pathname === '/admin') return;
+
     const header = document.getElementById('myHeader');
     const totop = document.getElementById('scroll-to-top');
     const sticky = header.offsetTop;
@@ -101,10 +100,11 @@ const Header = function () {
       }
     });
     return () => {
+      if (window.location.pathname === '/admin') return;
       window.removeEventListener('scroll', scrollCallBack);
     };
   }, []);
-  return (
+  return window.location.pathname !== '/admin' ? (
     <header id="myHeader" className="navbar white">
       <div className="container">
         <div className="row w-100-nav">
@@ -443,6 +443,8 @@ const Header = function () {
         </div>
       </div>
     </header>
+  ) : (
+    <div></div>
   );
 };
 

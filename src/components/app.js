@@ -36,6 +36,8 @@ import Progressbar from './pages/progressbar';
 import Tabs from './pages/tabs';
 
 import { createGlobalStyle } from 'styled-components';
+import BoxDetail from './box/BoxDetail';
+import Admin from '../templates/Admin';
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -44,29 +46,27 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export const ScrollTop = ({ children, location }) => {
-  React.useEffect(() => window.scrollTo(0,0), [location])
-  return children
-}
+  React.useEffect(() => window.scrollTo(0, 0), [location]);
+  return children;
+};
 
 const PosedRouter = ({ children }) => (
   <Location>
     {({ location }) => (
-      <div id='routerhang'>
+      <div id="routerhang">
         <div key={location.key}>
-          <Router location={location}>
-            {children}
-          </Router>
+          <Router location={location}>{children}</Router>
         </div>
       </div>
     )}
   </Location>
 );
 
-const app= () => (
+const app = () => (
   <div className="wraper">
-  <GlobalStyles />
-    <Header/>
-      <PosedRouter>
+    <GlobalStyles />
+    <Header />
+    <PosedRouter>
       <ScrollTop path="/">
         <Home exact path="/">
           <Redirect to="/home" />
@@ -102,10 +102,11 @@ const app= () => (
         <Alerts path="/alerts" />
         <Progressbar path="/progressbar" />
         <Tabs path="/tabs" />
-        </ScrollTop>
-      </PosedRouter>
+        <BoxDetail path="/boxdetail/:id" />
+        <Admin path="/admin" />
+      </ScrollTop>
+    </PosedRouter>
     <ScrollToTopBtn />
-    
   </div>
 );
 export default app;

@@ -6,8 +6,13 @@ import CarouselNew from '../components/CarouselNew';
 import AuthorList from '../components/authorList';
 import Catgor from '../components/Catgor';
 import Footer from '../components/footer';
+import useFetch from '../../hook/GetFetch';
+import BoxList from '../box/BoxList';
 
-const home = () => (
+const Home = () => {
+  const{data:box, isPending, error}= useFetch('https://sweetincmgmtapi.azurewebsites.net/api/Boxes/GetAll');
+  console.log(box);
+  return(
   <div>
     <section
       id="mySliderMain"
@@ -55,8 +60,11 @@ const home = () => (
             <div className="small-border"></div>
           </div>
         </div>
+
         <div className="col-lg-12">
-          <CarouselNew />
+        {error && <div>{error}</div>}
+        { isPending && <div>Loading ...</div> }
+        {box && <BoxList boxs = {box}></BoxList>}
         </div>
       </div>
     </section>
@@ -90,4 +98,5 @@ const home = () => (
     <Footer />
   </div>
 );
-export default home;
+    }
+export default Home;
