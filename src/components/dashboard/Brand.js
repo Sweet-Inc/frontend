@@ -1,107 +1,75 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
-import { useGetAllBrandQuery } from '../../services/brand';
-
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-  return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-  createData(
-    0,
-    '16 Mar, 2019',
-    'Elvis Presley',
-    'Tupelo, MS',
-    'VISA ⠀•••• 3719',
-    312.44
-  ),
-  createData(
-    1,
-    '16 Mar, 2019',
-    'Paul McCartney',
-    'London, UK',
-    'VISA ⠀•••• 2574',
-    866.99
-  ),
-  createData(
-    2,
-    '16 Mar, 2019',
-    'Tom Scholz',
-    'Boston, MA',
-    'MC ⠀•••• 1253',
-    100.81
-  ),
-  createData(
-    3,
-    '16 Mar, 2019',
-    'Michael Jackson',
-    'Gary, IN',
-    'AMEX ⠀•••• 2000',
-    654.39
-  ),
-  createData(
-    4,
-    '15 Mar, 2019',
-    'Bruce Springsteen',
-    'Long Branch, NJ',
-    'VISA ⠀•••• 5919',
-    212.79
-  ),
-];
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}));
+import { Button } from '@material-ui/core';
+import EditModal from '../components/Modal';
+import {
+  useGetAllBrandQuery,
+  useDeleteBrandMutation,
+  useEditBrandMutation,
+} from '../../services/brand';
 
 export default function Brand() {
-  const classes = useStyles();
-  const { data, error, isLoading } = useGetAllBrandQuery();
+  const { data, isLoading } = useGetAllBrandQuery();
+  const [deleteBrand] = useDeleteBrandMutation();
+  const [editBrand] = useEditBrandMutation();
 
-  console.log(data);
+  const handleDeleteBrand = async (id) => {
+    await deleteBrand({ id });
+  };
+
+  const handleEditBrand = async (data) => {
+    await editBrand({ data });
+  };
+
   return (
     <React.Fragment>
-      <Title>Recent Brand</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+      <Title>Brands Management</Title>
+      {!isLoading ? (
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell>Origin</TableCell>
+              <TableCell>Products</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
+          </TableHead>
+          <TableBody>
+            {data?.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.name}</TableCell>
+                <TableCell>{item.origin}</TableCell>
+                <TableCell>{item.products}</TableCell>
+                <TableCell align="right">
+                  <div>
+                    <EditModal
+                      mgmtType="brand"
+                      dataItem={item}
+                      handleEdit={handleEditBrand}
+                    />
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDeleteBrand(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <p>Loading...</p>
+      )}
     </React.Fragment>
   );
 }
