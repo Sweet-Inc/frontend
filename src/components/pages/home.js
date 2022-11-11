@@ -61,7 +61,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="col-lg-12">
+        <div className="a">
         {error && <div>{error}</div>}
         { isPending && <div>Loading ...</div> }
         {box && <BoxList boxs = {box}></BoxList>}

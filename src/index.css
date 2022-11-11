@@ -16,3 +16,30 @@ img-fluid d-block {
   width: 100%;
   height: auto;
 }
+
+.box-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 70%;
+  height: 100%;
+  margin: 50px auto;
+  padding: 50px 0 0;
+  box-sizing: border-box;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.card{
+  width: 30%;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  transform:scale(.8);
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+
+}
