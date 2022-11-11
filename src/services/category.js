@@ -7,13 +7,37 @@ export const categoryApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://sweetincmgmtapi.azurewebsites.net/api/',
   }),
+  tagTypes: ['Category'],
   endpoints: (builder) => ({
     getAllCategory: builder.query({
       query: () => `Catagories/GetAll`,
+      providesTags: ['Category'],
+    }),
+    deleteCategory: builder.mutation({
+      query: ({ id }) => ({
+        url: `Catagories/Delete/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Category'],
+    }),
+    editCategory: builder.mutation({
+      query: ({ data }) => ({
+        url: `Catagories/Update/${data.id}`,
+        method: 'PUT',
+        body: {
+          id: data.id,
+          name: data.name,
+        },
+      }),
+      invalidatesTags: ['Category'],
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllCategoryQuery } = categoryApi;
+export const {
+  useGetAllCategoryQuery,
+  useDeleteCategoryMutation,
+  useEditCategoryMutation,
+} = categoryApi;

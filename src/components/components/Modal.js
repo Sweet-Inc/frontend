@@ -31,12 +31,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EditModal({ box, handleEditBox }) {
+export default function EditModal({ mgmtType, dataItem, handleEdit }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
-  const [boxData, setBoxData] = React.useState(box);
+  const [data, setData] = React.useState(dataItem);
 
   const handleOpen = () => {
     setOpen(true);
@@ -48,82 +48,188 @@ export default function EditModal({ box, handleEditBox }) {
 
   const handleChangeValue = (e) => {
     const { name, value } = e.target;
-    setBoxData({
-      ...boxData,
+    setData({
+      ...data,
       [name]: value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await handleEditBox({
-      ...boxData,
-      id: Number(boxData.id) || 0,
-      quantity: Number(boxData.quantity) || 0,
-      lowerAge: Number(boxData.lowerAge) || 0,
-      upperAge: Number(boxData.upperAge) || 0,
-      boxPatternId: Number(boxData.boxPatternId) || 0,
-    });
+    if (mgmtType === 'box') {
+      await handleEdit({
+        ...data,
+        id: Number(data.id) || 0,
+        quantity: Number(data.quantity) || 0,
+        lowerAge: Number(data.lowerAge) || 0,
+        upperAge: Number(data.upperAge) || 0,
+        boxPatternId: Number(data.boxPatternId) || 0,
+      });
+    } else if (mgmtType === 'brand') {
+      await handleEdit({
+        ...data,
+        id: Number(data.id) || 0,
+        name: data.name,
+        originid: data.originid,
+      });
+    } else if (mgmtType === 'category') {
+      await handleEdit({
+        ...data,
+        id: Number(data.id) || 0,
+        name: data.name,
+      });
+    }
     handleClose();
   };
 
-  const body = (
-    <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Edit</h2>
-      <div className={classes.container}>
-        <TextField
-          disabled
-          name="id"
-          id="id"
-          label="ID:"
-          defaultValue={box.id}
-        />
-        <TextField
-          id="lowerAge"
-          name="lowerAge"
-          label="From age:"
-          type="number"
-          defaultValue={box.lowerAge}
-          onChange={handleChangeValue}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField
-          id="upperAge"
-          name="upperAge"
-          label="To age:"
-          type="number"
-          defaultValue={box.upperAge}
-          onChange={handleChangeValue}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-        <TextField
-          id="quantity"
-          name="quantity"
-          label="Quantity"
-          type="number"
-          defaultValue={box.quantity}
-          onChange={handleChangeValue}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-      </div>
-      <br />
-      <Button
-        type="submit"
-        variant="contained"
-        color="primary"
-        onClick={handleSubmit}
-      >
-        Save
-      </Button>
-      <Modal />
-    </div>
-  );
+  const handleCorrectEditForm = () => {
+    switch (mgmtType) {
+      case 'box':
+        return (
+          <div style={modalStyle} className={classes.paper}>
+            <h3 id="simple-modal-title">Edit box with ID {data.id}</h3>
+            <div className={classes.container}>
+              <TextField
+                disabled
+                name="id"
+                id="id"
+                label="ID:"
+                defaultValue={data.id}
+              />
+              <TextField
+                id="lowerAge"
+                name="lowerAge"
+                label="From age:"
+                type="number"
+                defaultValue={data.lowerAge}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="upperAge"
+                name="upperAge"
+                label="To age:"
+                type="number"
+                defaultValue={data.upperAge}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="quantity"
+                name="quantity"
+                label="Quantity"
+                type="number"
+                defaultValue={data.quantity}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+            <Modal />
+          </div>
+        );
+
+      case 'brand':
+        return (
+          <div style={modalStyle} className={classes.paper}>
+            <h3 id="simple-modal-title">Edit brand with ID {data.id}</h3>
+            <div className={classes.container}>
+              <TextField
+                disabled
+                name="id"
+                id="id"
+                label="ID:"
+                defaultValue={data.id}
+              />
+              <TextField
+                id="name"
+                name="name"
+                label="Name:"
+                defaultValue={data.name}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="originid"
+                name="originid"
+                label="Origin Id:"
+                type="number"
+                defaultValue={data.originid}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+            <Modal />
+          </div>
+        );
+
+      case 'category':
+        return (
+          <div style={modalStyle} className={classes.paper}>
+            <h3 id="simple-modal-title">Edit category with ID {data.id}</h3>
+            <div className={classes.container}>
+              <TextField
+                disabled
+                name="id"
+                id="id"
+                label="ID:"
+                defaultValue={data.id}
+              />
+              <TextField
+                id="name"
+                name="name"
+                label="Name:"
+                defaultValue={data.name}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+            <Modal />
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
 
   return (
     <span>
@@ -141,7 +247,7 @@ export default function EditModal({ box, handleEditBox }) {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
-        {body}
+        {handleCorrectEditForm()}
       </Modal>
     </span>
   );

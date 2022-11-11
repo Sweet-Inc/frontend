@@ -7,13 +7,38 @@ export const brandApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://sweetincmgmtapi.azurewebsites.net/api/',
   }),
+  tagTypes: ['Brand'],
   endpoints: (builder) => ({
     getAllBrand: builder.query({
       query: () => `Brands/GetAll`,
+      providesTags: ['Brand'],
+    }),
+    deleteBrand: builder.mutation({
+      query: ({ id }) => ({
+        url: `Brands/Delete/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Brand'],
+    }),
+    editBrand: builder.mutation({
+      query: ({ data }) => ({
+        url: `Brands/Update/${data.id}`,
+        method: 'PUT',
+        body: {
+          id: data.id,
+          name: data.name,
+          originid: data.originid,
+        },
+      }),
+      invalidatesTags: ['Brand'],
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllBrandQuery } = brandApi;
+export const {
+  useGetAllBrandQuery,
+  useEditBrandMutation,
+  useDeleteBrandMutation,
+} = brandApi;
