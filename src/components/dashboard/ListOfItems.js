@@ -6,7 +6,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 
-const ListItems = ({ handleChangeMgmt }) => {
+export default function ListOfItems({ handleChangeMgmt }) {
   return (
     <div>
       <ListItem button onClick={() => handleChangeMgmt('boxes')}>
@@ -29,6 +29,4 @@ const ListItems = ({ handleChangeMgmt }) => {
       </ListItem>
     </div>
   );
-};
-
-export default ListItems;
+}

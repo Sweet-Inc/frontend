@@ -18,7 +18,7 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import ListItems from './ListItems';
+import ListOfItems from './ListOfItems';
 import BoxMgmt from './Box';
 import Category from './Category';
 import Brand from './Brand';
@@ -197,7 +197,7 @@ export default function Dashboard() {
         </div>
         <Divider />
         <List>
-          <ListItems handleChangeMgmt={handleChangeMgmt} />
+          <ListOfItems handleChangeMgmt={handleChangeMgmt} />
         </List>
       </Drawer>
       <main className={classes.content}>
