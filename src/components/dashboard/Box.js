@@ -27,58 +27,66 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Box() {
   const classes = useStyles();
-  const { data, error, isLoading } = useGetAllBoxQuery();
-  const [deleteBox, resultDelete] = useDeleteBoxMutation();
-  const [editBox, resultEdit] = useEditBoxMutation();
+  const { data, isLoading } = useGetAllBoxQuery();
+  const [deleteBox] = useDeleteBoxMutation();
+  const [editBox] = useEditBoxMutation();
 
-  const handleDeleteBox = async (id) => {
+  const handleDelete = async (id) => {
     await deleteBox({ id });
   };
 
-  const handleEditBox = async (data) => {
+  const handleEdit = async (data) => {
     await editBox({ data });
   };
 
   return (
     <React.Fragment>
-      <Title>Box Management</Title>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>From Age</TableCell>
-            <TableCell>To Age</TableCell>
-            <TableCell>Pattern ID</TableCell>
-            <TableCell>Status</TableCell>
-            <TableCell>Quantity</TableCell>
-            <TableCell align="center">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data?.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.id}</TableCell>
-              <TableCell>{item.lowerAge}</TableCell>
-              <TableCell>{item.upperAge}</TableCell>
-              <TableCell>{item.boxPatternId}</TableCell>
-              <TableCell>{!item.status ? 'sold out' : 'available'}</TableCell>
-              <TableCell>{item.quantity}</TableCell>
-              <TableCell align="right">
-                <div>
-                  <EditModal box={item} handleEditBox={handleEditBox} />
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={() => handleDeleteBox(item.id)}
-                  >
-                    Delete
-                  </Button>
-                </div>
-              </TableCell>
+      <Title>Boxes Management</Title>
+      {!isLoading ? (
+        <Table size="small">
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>From Age</TableCell>
+              <TableCell>To Age</TableCell>
+              <TableCell>Pattern ID</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Quantity</TableCell>
+              <TableCell align="center">Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+          <TableBody>
+            {data?.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.lowerAge}</TableCell>
+                <TableCell>{item.upperAge}</TableCell>
+                <TableCell>{item.boxPatternId}</TableCell>
+                <TableCell>{!item.status ? 'sold out' : 'available'}</TableCell>
+                <TableCell>{item.quantity}</TableCell>
+                <TableCell align="right">
+                  <div>
+                    <EditModal
+                      mgmtType="box"
+                      dataItem={item}
+                      handleEditBox={handleEdit}
+                    />
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => handleDelete(item.id)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <p>Loading...</p>
+      )}
     </React.Fragment>
   );
 }

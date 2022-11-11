@@ -7,6 +7,7 @@ export const boxApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: 'https://sweetincmgmtapi.azurewebsites.net/api/',
   }),
+  tagTypes: ['Box'],
   endpoints: (builder) => ({
     getAllBox: builder.query({
       query: () => `Boxes/GetAll`,
