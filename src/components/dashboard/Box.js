@@ -11,9 +11,11 @@ import {
   useDeleteBoxMutation,
   useEditBoxMutation,
   useGetAllBoxQuery,
+  useCreateBoxMutation,
 } from '../../services/box';
 import { Button } from '@material-ui/core';
 import EditModal from '../components/Modal';
+import CreateModal from '../components/CreateModal';
 
 function preventDefault(event) {
   event.preventDefault();
@@ -30,6 +32,7 @@ export default function Box() {
   const { data, isLoading } = useGetAllBoxQuery();
   const [deleteBox] = useDeleteBoxMutation();
   const [editBox] = useEditBoxMutation();
+  const [createBox] = useCreateBoxMutation();
 
   const handleDelete = async (id) => {
     await deleteBox({ id });
@@ -39,9 +42,16 @@ export default function Box() {
     await editBox({ data });
   };
 
+  const handleCreate = async (data) => {
+    await createBox({ data });
+  };
+
   return (
     <React.Fragment>
-      <Title>Boxes Management</Title>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Title>Boxes Management</Title>
+        <CreateModal mgmtType="box" handleCreate={handleCreate} />
+      </div>
       {!isLoading ? (
         <Table size="small">
           <TableHead>
@@ -49,7 +59,7 @@ export default function Box() {
               <TableCell>ID</TableCell>
               <TableCell>From Age</TableCell>
               <TableCell>To Age</TableCell>
-              <TableCell>Pattern ID</TableCell>
+              <TableCell>Pattern Name</TableCell>
               <TableCell>Status</TableCell>
               <TableCell>Quantity</TableCell>
               <TableCell align="center">Actions</TableCell>
@@ -61,7 +71,7 @@ export default function Box() {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.lowerAge}</TableCell>
                 <TableCell>{item.upperAge}</TableCell>
-                <TableCell>{item.boxPatternId}</TableCell>
+                <TableCell>{item.boxPattern.name}</TableCell>
                 <TableCell>{!item.status ? 'sold out' : 'available'}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
                 <TableCell align="right">
@@ -69,7 +79,7 @@ export default function Box() {
                     <EditModal
                       mgmtType="box"
                       dataItem={item}
-                      handleEditBox={handleEdit}
+                      handleEdit={handleEdit}
                     />
                     <Button
                       variant="contained"

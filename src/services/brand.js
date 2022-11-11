@@ -32,6 +32,17 @@ export const brandApi = createApi({
       }),
       invalidatesTags: ['Brand'],
     }),
+    createBrand: builder.mutation({
+      query: ({ data }) => ({
+        url: `Brands/Add`,
+        method: 'POST',
+        body: {
+          name: data.name,
+          originid: data.originid,
+        },
+      }),
+      invalidatesTags: ['Brand'],
+    }),
   }),
 });
 
@@ -41,4 +52,5 @@ export const {
   useGetAllBrandQuery,
   useEditBrandMutation,
   useDeleteBrandMutation,
+  useCreateBrandMutation,
 } = brandApi;

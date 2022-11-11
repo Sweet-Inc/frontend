@@ -35,10 +35,28 @@ export const boxApi = createApi({
       }),
       invalidatesTags: ['Box'],
     }),
+    createBox: builder.mutation({
+      query: ({ data }) => ({
+        url: `Boxes/Add`,
+        method: 'POST',
+        body: {
+          quantity: data.quantity,
+          lowerAge: data.lowerAge,
+          upperAge: data.upperAge,
+          status: data.status,
+          boxPatternId: data.boxPatternId,
+        },
+      }),
+      invalidatesTags: ['Box'],
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllBoxQuery, useDeleteBoxMutation, useEditBoxMutation } =
-  boxApi;
+export const {
+  useGetAllBoxQuery,
+  useDeleteBoxMutation,
+  useEditBoxMutation,
+  useCreateBoxMutation,
+} = boxApi;

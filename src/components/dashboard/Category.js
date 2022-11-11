@@ -11,11 +11,14 @@ import {
   useGetAllCategoryQuery,
   useDeleteCategoryMutation,
   useEditCategoryMutation,
+  useCreateCategoryMutation,
 } from '../../services/category';
+import CreateModal from '../components/CreateModal';
 
 export default function Category() {
   const { data, isLoading } = useGetAllCategoryQuery();
   const [deleteCategory] = useDeleteCategoryMutation();
+  const [createCategory] = useCreateCategoryMutation();
   const [editCategory] = useEditCategoryMutation();
 
   const handleDeleteCategory = async (id) => {
@@ -26,9 +29,16 @@ export default function Category() {
     await editCategory({ data });
   };
 
+  const handleCreateCategory = async (data) => {
+    await createCategory({ data });
+  };
+
   return (
     <React.Fragment>
-      <Title>Categories Management</Title>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Title>Categories Management</Title>
+        <CreateModal mgmtType="category" handleCreate={handleCreateCategory} />
+      </div>
       {!isLoading ? (
         <Table size="small">
           <TableHead>
@@ -44,7 +54,7 @@ export default function Category() {
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.products}</TableCell>
+                <TableCell>{item.products?.length}</TableCell>
                 <TableCell align="right">
                   <div>
                     <EditModal

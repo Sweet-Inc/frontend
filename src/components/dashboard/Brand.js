@@ -11,11 +11,14 @@ import {
   useGetAllBrandQuery,
   useDeleteBrandMutation,
   useEditBrandMutation,
+  useCreateBrandMutation,
 } from '../../services/brand';
+import CreateModal from '../components/CreateModal';
 
 export default function Brand() {
   const { data, isLoading } = useGetAllBrandQuery();
   const [deleteBrand] = useDeleteBrandMutation();
+  const [createBrand] = useCreateBrandMutation();
   const [editBrand] = useEditBrandMutation();
 
   const handleDeleteBrand = async (id) => {
@@ -26,9 +29,16 @@ export default function Brand() {
     await editBrand({ data });
   };
 
+  const handleCreateBrand = async (data) => {
+    await createBrand({ data });
+  };
+
   return (
     <React.Fragment>
-      <Title>Brands Management</Title>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Title>Brands Management</Title>
+        <CreateModal mgmtType="brand" handleCreate={handleCreateBrand} />
+      </div>
       {!isLoading ? (
         <Table size="small">
           <TableHead>
@@ -36,7 +46,7 @@ export default function Brand() {
               <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Origin</TableCell>
-              <TableCell>Products</TableCell>
+              <TableCell>Total products</TableCell>
               <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
@@ -45,8 +55,8 @@ export default function Brand() {
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.name}</TableCell>
-                <TableCell>{item.origin}</TableCell>
-                <TableCell>{item.products}</TableCell>
+                <TableCell>{item.origin?.name}</TableCell>
+                <TableCell>{item.products?.length}</TableCell>
                 <TableCell align="right">
                   <div>
                     <EditModal
