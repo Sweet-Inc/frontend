@@ -64,16 +64,19 @@ html {scroll-behavior: auto;}
   justify-content: center;
   align-items: center;
 }
+.button_add_to_cart {
+  color: black;
+}
 .box-list{
   @extend .dFlex;
   position: relative;
-  width: 40%;
+  width: 100%;
   height: 60%;
   padding: 10px 0 0;
   margin-bottom: 50px;
-  margin-top: 50px;
   box-sizing: border-box;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 .card{
   @extend .dFlex;
@@ -2630,6 +2633,26 @@ i.font60 {
     transition: .7s;
 }
 
+.pattern_coll {
+  width: calc(23%);
+  background: #ffffff;
+  padding-bottom: 10px;
+  border: solid 1px #dddddd;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  margin: 10px;
+  img{
+    transition: .7s;
+  }
+  &:hover{
+    img{
+      transform: scale(1.05);
+      transition: .7s;
+    }
+  }
+}
+
 .nft_coll {
     background: #ffffff;
     padding-bottom: 10px;
@@ -2690,6 +2713,9 @@ i.font60 {
     right: 5px;
 }
 .nft_coll_info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
     text-align: center;
     padding-bottom: 10px;
     span{
