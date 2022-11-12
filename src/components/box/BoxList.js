@@ -1,4 +1,9 @@
+import { useDispatch } from 'react-redux';
+import { addItem } from '../../features/cart/cartSlice';
+
 const BoxList = ({ boxs }) => {
+  const dispatch = useDispatch();
+
   return (
     <div className="box-list">
       {boxs &&
@@ -18,8 +23,13 @@ const BoxList = ({ boxs }) => {
               <span onClick={() => console.log('clicked')}>
                 <h4>{item.name}</h4>
               </span>
-              <span>{item.price}</span>
-              <span className="btn-main lead">Add to Cart</span>
+              <span>{item.price}.000VNĐ</span>
+              <span
+                className="btn-main lead"
+                onClick={() => dispatch(addItem())}
+              >
+                Add to Cart
+              </span>
             </div>
           </div>
         ))}
