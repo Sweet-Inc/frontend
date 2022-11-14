@@ -129,6 +129,17 @@ export default function EditModal({ mgmtType, dataItem, handleEdit }) {
                   shrink: true,
                 }}
               />
+              <TextField
+                id="boxPatternId"
+                name="boxPatternId"
+                label="Pattern ID:"
+                type="number"
+                defaultValue={data.boxPatternId}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </div>
             <br />
             <Button

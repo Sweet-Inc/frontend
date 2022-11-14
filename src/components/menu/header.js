@@ -141,22 +141,23 @@ const Header = function () {
             <Breakpoint xl>
               <div className="menu">
                 <div className="navbar-item">
-                  <NavLink to="/activity">
-                    Candy All
+                  <Link to="/">
+                    All candy
                     <span className="lines"></span>
-                  </NavLink>
+                  </Link>
                 </div>
-
-                <div className="navbar-item">
-                  <NavLink to="/activity">
-                    Brands
-                    <span className="lines"></span>
-                  </NavLink>
-                </div>
+                {res ? (
+                  <div className="navbar-item">
+                    <NavLink to="/custombox">
+                      Custom box
+                      <span className="lines"></span>
+                    </NavLink>
+                  </div>
+                ) : null}
               </div>
             </Breakpoint>
           </BreakpointProvider>
-          <CartModal />
+          {res ? <CartModal /> : null}
           {res ? (
             <div className="navbar-item">
               <div
@@ -207,7 +208,7 @@ const Header = function () {
             </div>
           ) : (
             <button className="btn-main" onClick={login}>
-              <span>Login</span>
+              <span style={{ color: '#fff' }}>Login</span>
             </button>
           )}
         </div>

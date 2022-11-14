@@ -19,8 +19,15 @@ const Home = () => {
   const handleTransformData = (boxs) => {
     let data = [];
     for (let i = 0; i < boxs.length; i++) {
-      data.push(boxs[i].boxPattern);
+      if (boxs[i].boxPattern.status) {
+        data.push(boxs[i].boxPattern);
+      }
     }
+    data = data.reduce(
+      (items, item) =>
+        items.find((x) => x.id === item.id) ? [...items] : [...items, item],
+      []
+    );
     return data;
   };
 
