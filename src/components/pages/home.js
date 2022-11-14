@@ -23,6 +23,7 @@ const Home = () => {
     }
     return data;
   };
+  console.log(box);
 
   return (
     <div>

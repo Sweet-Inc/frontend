@@ -3,7 +3,6 @@ import { addItem } from '../../features/cart/cartSlice';
 
 const BoxList = ({ boxs }) => {
   const dispatch = useDispatch();
-
   return (
     <div className="box-list">
       {boxs &&
@@ -12,7 +11,7 @@ const BoxList = ({ boxs }) => {
             <div className="nft_wrap">
               <span>
                 <img
-                  src="./img/collections/coll-1.jpg"
+                  src={item.image}
                   className="lazy img-fluid"
                   alt=""
                 />
