@@ -65,6 +65,7 @@ const Home = () => {
             {isPending && <div>Loading ...</div>}
             {box && <BoxList boxs = {box}></BoxList>}
           </div>
+          
           <div>
           <CarouselCollection></CarouselCollection>
           </div>
