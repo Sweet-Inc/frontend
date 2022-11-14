@@ -1,18 +1,22 @@
 
 import { useEffect, useState } from "react";
-
+import React, { Component } from "react";
+import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 const useFectch = (url) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null)
 
-  useEffect(() => {
+   useEffect(() => {
+    const abortCont = new AbortController();
 
-      fetch(url)
+      fetch(url, { signal: abortCont.signal })
         .then(respone => {
 
           if (!respone.ok) {
-            throw Error(' could not fetch data')
+            throw Error("Error " +respone.status )
           }
           return respone.json();
         })
@@ -24,7 +28,8 @@ const useFectch = (url) => {
         }).catch(err => {
             setError(err.message)
             setIsPending(false);
-        })
+        });
+        return () => abortCont.abort();
  }, [url]);
   return { data, isPending, error };
 }
