@@ -12,7 +12,7 @@ const useFectch = (url) => {
         .then(respone => {
 
           if (!respone.ok) {
-            throw Error(' could not fetch data')
+            throw Error("Error " +respone.status)
           }
           return respone.json();
         })

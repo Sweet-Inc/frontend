@@ -22,6 +22,8 @@ const BoxDetail = () => {
          <Header />
 
             <section className="container no-bottom">
+            {error && <div>{error}</div>}
+            {isPending && <div>Loading ...</div>}
                {box &&box.boxProducts.map((item)=>
                (
                <div className="pattern_coll">
@@ -43,7 +45,6 @@ const BoxDetail = () => {
            </div>
               ) )}
             </section>
-
             <Footer />
         </React.Fragment>
 
