@@ -105,7 +105,7 @@ const app = () => (
         <Alerts path="/alerts" />
         <Progressbar path="/progressbar" />
         <Tabs path="/tabs" />
-        <BoxDetail path="/boxdetail" />
+        <BoxDetail path="/boxdetail/:id" />
         <Admin path="/admin" />
       </ScrollTop>
     </PosedRouter>

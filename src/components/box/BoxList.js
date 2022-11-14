@@ -1,3 +1,4 @@
+import { Link } from '@reach/router';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../features/cart/cartSlice';
 
@@ -7,7 +8,8 @@ const BoxList = ({ boxs }) => {
     <div className="box-list">
       {boxs &&
         boxs.map((item) => (
-          <div className="pattern_coll">
+          <div className="pattern_coll" key={item.id}>
+            <Link to ={`/boxdetail/${item.id}`}>
             <div className="nft_wrap">
               <span>
                 <img
@@ -30,6 +32,7 @@ const BoxList = ({ boxs }) => {
                 Add to Cart
               </span>
             </div>
+            </Link>
           </div>
         ))}
     </div>

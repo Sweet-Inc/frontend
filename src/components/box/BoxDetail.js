@@ -3,62 +3,52 @@ import React from "react";
 import useFectch from "../../hook/GetFetch";
 import Footer from '../components/footer';
 import { createGlobalStyle } from 'styled-components';
-
+import Header from "../menu/header";
 const GlobalStyles = createGlobalStyle`
-  header#myHeader.navbar.white {
-    background: #fff;
-    border-bottom: solid 1px #dddddd;
-  }
-  @media only screen and (max-width: 1199px) {
-    .navbar{
-      background: #403f83;
-    }
-    .navbar .menu-line, .navbar .menu-line1, .navbar .menu-line2{
-      background: #111;
-    }
-    .item-dropdown .dropdown a{
-      color: #111 !important;
-    }
-  }
+:root {
+  scroll-behavior: unset;
+}
 `;
 
 const BoxDetail = () => {
     const { id } = useParams();
     const { data: box, isPending, error } = useFectch('https://sweetincmgmtapi.azurewebsites.net/api/Boxes/GetByPrimaryKey/' + id);
-///////////////////
-   
+    ///////////////////
+    console.log(box)
     /////////////////////
     return (
-            <React.Fragment>
-              
- <GlobalStyles />
- <section className="container no-bottom">
-            <div className="pattern_coll">
-                <div className="nft_wrap">
-                    <span>
-                        <img
-                            src={"./img/carousel/crs-2.jpg"}
-                            className="lazy img-fluid"
-                            alt="" />
-                    </span>
-                </div>
-                <div className="nft_coll_info">
-                    <br />
-                    <span onClick={() => console.log('clicked')}>
-                        <h4>abc</h4>
-                    </span>
-                    <span>123.000VNĐ</span>
-                </div>
-            </div>
+        <React.Fragment>
+            <GlobalStyles />
+         <Header />
+
+            <section className="container no-bottom">
+               {box &&box.boxProducts.map((item)=>
+               (
+               <div className="pattern_coll">
+               <div className="nft_wraps">
+                   <span>
+                       <img
+                           src={item.product.image}
+                           className="lazy img-fluid"
+                           alt="" />
+                   </span>
+               </div>
+               <div className="nft_coll_info">
+                   <br />
+                   <span onClick={() => console.log('clicked')}>
+                       <h4>{item.product.name}</h4>
+                   </span>
+                   <span>{item.product.price}</span>
+               </div>
+           </div>
+              ) )}
             </section>
-           
-     <Footer />
+
+            <Footer />
+        </React.Fragment>
 
 
-            </React.Fragment>
 
-
-          
     );
 }
 
