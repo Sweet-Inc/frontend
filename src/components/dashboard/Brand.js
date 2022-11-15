@@ -64,6 +64,7 @@ export default function Brand() {
                       dataItem={item}
                       handleEdit={handleEditBrand}
                     />
+                    <span>&nbsp;</span>
                     <Button
                       variant="contained"
                       color="secondary"
