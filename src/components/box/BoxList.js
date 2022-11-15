@@ -9,8 +9,8 @@ const BoxList = ({ boxs }) => {
     <div className="box-list">
       {boxs &&
         boxs.map((item) => (
-          <div className="pattern_coll" key={item.id}>
-            <Link to={`/boxdetail/${item.id}`}>
+          <div className="pattern_coll" key={item.boxId}>
+            <Link to={`/boxdetail/${item.boxId}`}>
               <div className="nft_wrap">
                 <span>
                   <img
@@ -39,6 +39,7 @@ const BoxList = ({ boxs }) => {
                   </h4>
                 </span>
                 <span>{item.price}.000VNĐ</span>
+                <span>&nbsp;</span>
                 <span
                   className="btn-main lead"
                   onClick={() => dispatch(addItem(item))}
