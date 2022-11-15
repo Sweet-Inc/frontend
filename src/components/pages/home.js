@@ -62,7 +62,7 @@ const Home = () => {
           <div className="a">
             {error && <div>{error}</div>}
             {isPending && <div>Loading ...</div>}
-            {box && <BoxList boxs={box}></BoxList>}
+            {box && <BoxList boxs={handleTransformData(box)}></BoxList>}
           </div>
         </div>
       </section>
