@@ -22,6 +22,7 @@ import ListOfItems from './ListOfItems';
 import BoxMgmt from './Box';
 import Category from './Category';
 import Brand from './Brand';
+import BoxPattern from './BoxPattern';
 
 function Copyright() {
   return (
@@ -142,6 +143,8 @@ export default function Dashboard() {
         return <Brand />;
       case 'categories':
         return <Category />;
+      case 'boxPatterns':
+        return <BoxPattern />;
       default:
         return <Box />;
     }
