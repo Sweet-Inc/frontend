@@ -1,9 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SliderMain from '../components/SliderMain';
-import FeatureBox from '../components/FeatureBox';
-import CarouselCollection from '../components/CarouselCollection';
-import CarouselNew from '../components/CarouselNew';
-import AuthorList from '../components/authorList';
 import Catgor from '../components/Catgor';
 import Footer from '../components/footer';
 import useFetch from '../../hook/GetFetch';
@@ -19,8 +15,15 @@ const Home = () => {
   const handleTransformData = (boxs) => {
     let data = [];
     for (let i = 0; i < boxs.length; i++) {
-      data.push(boxs[i].boxPattern);
+      if (boxs[i].boxPattern.status) {
+        data.push({ ...boxs[i].boxPattern, boxId: boxs[i].id });
+      }
     }
+    data = data.reduce(
+      (items, item) =>
+        items.find((x) => x.id === item.id) ? [...items] : [...items, item],
+      []
+    );
     return data;
   };
   console.log(box);
@@ -46,10 +49,6 @@ const Home = () => {
       >
         <SliderMain />
       </div>
-
-      {/* <section className='container no-top no-bottom'>
-        <FeatureBox/>
-      </section> */}
 
       <section className="container no-bottom">
         <div className="row">

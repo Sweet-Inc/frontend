@@ -8,23 +8,45 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItem: (state) => {
-      // Redux Toolkit allows us to write "mutating" logic in reducers. It
-      // doesn't actually mutate the state because it uses the Immer library,
-      // which detects changes to a "draft state" and produces a brand new
-      // immutable state based off those changes
-      state.data.push(1);
+    addItem: (state, action) => {
+      let index = state.data.findIndex((item) => item.id === action.payload.id);
+      if (index !== -1) {
+        let newDataState = [...state.data];
+        newDataState[index] = {
+          ...state.data[index],
+          quantity: state.data[index].quantity + 1,
+        };
+        state.data = newDataState;
+      } else {
+        state.data.push({ ...action.payload, quantity: 1 });
+      }
     },
-    removeItem: (state) => {
-      state.data.pop();
+    decreaseQuantity: (state, action) => {
+      let index = state.data.findIndex((item) => item.id === action.payload.id);
+
+      let newDataState = [...state.data];
+      if (newDataState[index].quantity === 1) {
+        state.data = state.data.filter((item) => item.id !== action.payload.id);
+        return;
+      }
+      newDataState[index] = {
+        ...state.data[index],
+        quantity: state.data[index].quantity - 1,
+      };
+      state.data = newDataState;
     },
-    clearCart: (state, action) => {
+    removeItem: (state, action) => {
+      console.log(action.payload.id);
+      state.data = state.data.filter((item) => item.id !== action.payload.id);
+    },
+    clearCart: (state) => {
       state.data = [];
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addItem, removeItem, clearCart } = cartSlice.actions;
+export const { addItem, removeItem, clearCart, decreaseQuantity } =
+  cartSlice.actions;
 
 export default cartSlice.reducer;

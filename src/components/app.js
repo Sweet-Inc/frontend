@@ -38,9 +38,7 @@ import Tabs from './pages/tabs';
 import { createGlobalStyle } from 'styled-components';
 import BoxDetail from './box/BoxDetail';
 import Admin from '../templates/Admin';
-import Box from './dashboard/Box';
-import Brand from './dashboard/Brand';
-import Category from './dashboard/Category';
+import CustomBox from './pages/customBox';
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -107,6 +105,7 @@ const app = () => (
         <Tabs path="/tabs" />
         <BoxDetail path="/boxdetail/:id" />
         <Admin path="/admin" />
+        <CustomBox path="/custombox" />
       </ScrollTop>
     </PosedRouter>
     <ScrollToTopBtn />
