@@ -2,10 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { useDispatch, useSelector } from 'react-redux';
+import { navigate } from '@reach/router';
+import Swal from 'sweetalert2';
+
 import {
   removeItem,
   addItem,
   decreaseQuantity,
+  clearCart,
 } from '../../features/cart/cartSlice';
 
 function getModalStyle() {
@@ -64,6 +68,19 @@ export default function CartModal() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handlePayment = async () => {
+    dispatch(clearCart());
+    const { isConfirmed } = await Swal.fire({
+      title: 'Sucessfully!',
+      text: 'Your payment is already completed!',
+      icon: 'success',
+      confirmButtonText: 'Cool',
+    });
+    if (isConfirmed) {
+      navigate('/');
+    }
   };
 
   const body = (
@@ -129,10 +146,7 @@ export default function CartModal() {
             </ul>
           </div>
           <div className={classes.footer}>
-            <span
-              onClick={() => window.open('/#', '_self')}
-              className="btn-main lead"
-            >
+            <span onClick={() => handlePayment()} className="btn-main lead">
               Process
             </span>
           </div>

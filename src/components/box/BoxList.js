@@ -10,24 +10,24 @@ const BoxList = ({ boxs }) => {
       {boxs &&
         boxs.map((item) => (
           <div className="pattern_coll" key={item.boxId}>
-            <Link to={`/boxdetail/${item.boxId}`}>
-              <div className="nft_wrap">
-                <span>
-                  <img
-                    src={item.image}
-                    className="lazy img-fluid"
-                    alt=""
-                    style={{
-                      objectFit: 'cover',
-                      height: '170px',
-                      width: '100%',
-                    }}
-                  />
-                </span>
-              </div>
-              <div className="nft_coll_info">
-                <br />
-                <span>
+            <div className="nft_wrap">
+              <span>
+                <img
+                  src={item.image}
+                  className="lazy img-fluid"
+                  alt=""
+                  style={{
+                    objectFit: 'cover',
+                    height: '170px',
+                    width: '100%',
+                  }}
+                />
+              </span>
+            </div>
+            <div className="nft_coll_info">
+              <br />
+              <span>
+                <Link to={`/boxdetail/${item.boxId}`}>
                   <h4
                     style={{
                       whiteSpace: 'nowrap',
@@ -37,17 +37,17 @@ const BoxList = ({ boxs }) => {
                   >
                     {item.name}
                   </h4>
-                </span>
-                <span>{item.price}.000VNĐ</span>
-                <span>&nbsp;</span>
-                <span
-                  className="btn-main lead"
-                  onClick={() => dispatch(addItem(item))}
-                >
-                  Add to Cart
-                </span>
-              </div>
-            </Link>
+                </Link>
+              </span>
+              <span>{item.price}.000VNĐ</span>
+              <span>&nbsp;</span>
+              <span
+                className="btn-main lead"
+                onClick={() => dispatch(addItem(item))}
+              >
+                Add to Cart
+              </span>
+            </div>
           </div>
         ))}
     </div>
