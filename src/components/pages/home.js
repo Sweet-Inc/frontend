@@ -26,6 +26,7 @@ const Home = () => {
     );
     return data;
   };
+  console.log(box);
 
   return (
     <div>
@@ -61,7 +62,11 @@ const Home = () => {
           <div className="a">
             {error && <div>{error}</div>}
             {isPending && <div>Loading ...</div>}
-            {box && <BoxList boxs={handleTransformData(box)}></BoxList>}
+            {box && <BoxList boxs = {box}></BoxList>}
+          </div>
+          
+          <div>
+          <CarouselCollection></CarouselCollection>
           </div>
         </div>
       </section>
