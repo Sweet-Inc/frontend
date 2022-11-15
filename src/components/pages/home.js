@@ -62,11 +62,7 @@ const Home = () => {
           <div className="a">
             {error && <div>{error}</div>}
             {isPending && <div>Loading ...</div>}
-            {box && <BoxList boxs = {box}></BoxList>}
-          </div>
-          
-          <div>
-          <CarouselCollection></CarouselCollection>
+            {box && <BoxList boxs={box}></BoxList>}
           </div>
         </div>
       </section>
