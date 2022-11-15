@@ -76,6 +76,15 @@ export default function CreateModal({ mgmtType, handleCreate }) {
         ...data,
         name: data.name,
       });
+    } else if (mgmtType === 'boxPattern') {
+      await handleCreate({
+        ...data,
+        name: data.name,
+        image:
+          data.image ||
+          'https://i2-prod.manchestereveningnews.co.uk/incoming/article24532662.ece/ALTERNATES/s1200b/0_GL3806364-2.jpg',
+        price: Number(data.price) || 0,
+      });
     }
     setData(null);
 
@@ -89,13 +98,6 @@ export default function CreateModal({ mgmtType, handleCreate }) {
           <div style={modalStyle} className={classes.paper}>
             <h3 id="simple-modal-title">Create new box</h3>
             <div className={classes.container}>
-              <TextField
-                disabled
-                name="id"
-                id="id"
-                label="ID:"
-                defaultValue={data?.id}
-              />
               <TextField
                 id="lowerAge"
                 name="lowerAge"
@@ -135,6 +137,55 @@ export default function CreateModal({ mgmtType, handleCreate }) {
                 label="Box Pattern:"
                 type="number"
                 defaultValue={data?.boxPatternId}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+            </div>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+            <Modal />
+          </div>
+        );
+
+      case 'boxPattern':
+        return (
+          <div style={modalStyle} className={classes.paper}>
+            <h3 id="simple-modal-title">Create new box pattern</h3>
+            <div className={classes.container}>
+              <TextField
+                id="name"
+                name="name"
+                label="Name:"
+                defaultValue={data?.name}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="image"
+                name="image"
+                label="Image URL:"
+                defaultValue={data?.image}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="price"
+                name="price"
+                label="Price:"
+                defaultValue={data?.price}
                 onChange={handleChangeValue}
                 InputLabelProps={{
                   shrink: true,

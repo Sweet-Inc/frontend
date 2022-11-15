@@ -1,7 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  TextField,
+  Switch,
+  FormLabel,
+  FormControlLabel,
+} from '@material-ui/core';
 
 function getModalStyle() {
   const top = 50;
@@ -47,10 +53,10 @@ export default function EditModal({ mgmtType, dataItem, handleEdit }) {
   };
 
   const handleChangeValue = (e) => {
-    const { name, value } = e.target;
+    const { name, value, checked } = e.target;
     setData({
       ...data,
-      [name]: value,
+      [name]: value || checked,
     });
   };
 
@@ -64,6 +70,17 @@ export default function EditModal({ mgmtType, dataItem, handleEdit }) {
         lowerAge: Number(data.lowerAge) || 0,
         upperAge: Number(data.upperAge) || 0,
         boxPatternId: Number(data.boxPatternId) || 0,
+      });
+    } else if (mgmtType === 'boxPattern') {
+      await handleEdit({
+        ...data,
+        id: Number(data.id) || 0,
+        name: data.name,
+        image:
+          data.image ||
+          'https://i2-prod.manchestereveningnews.co.uk/incoming/article24532662.ece/ALTERNATES/s1200b/0_GL3806364-2.jpg',
+        status: Boolean(data.status),
+        price: Number(data.price),
       });
     } else if (mgmtType === 'brand') {
       await handleEdit({
@@ -139,6 +156,75 @@ export default function EditModal({ mgmtType, dataItem, handleEdit }) {
                 InputLabelProps={{
                   shrink: true,
                 }}
+              />
+            </div>
+            <br />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+            <Modal />
+          </div>
+        );
+
+      case 'boxPattern':
+        return (
+          <div style={modalStyle} className={classes.paper}>
+            <h3 id="simple-modal-title">Edit box pattern with ID {data.id}</h3>
+            <div className={classes.container}>
+              <TextField
+                disabled
+                name="id"
+                id="id"
+                label="ID:"
+                defaultValue={data.id}
+              />
+              <TextField
+                id="name"
+                name="name"
+                label="Name:"
+                defaultValue={data?.name}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="image"
+                name="image"
+                label="Image URL:"
+                defaultValue={data?.image}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <TextField
+                id="price"
+                name="price"
+                label="Price:"
+                defaultValue={data?.price}
+                onChange={handleChangeValue}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
+              <br />
+              <FormLabel component="legend">Status:</FormLabel>
+              <FormControlLabel
+                control={
+                  <Switch
+                    checked={data?.status}
+                    onChange={handleChangeValue}
+                    id="status"
+                    name="status"
+                    color="primary"
+                  />
+                }
               />
             </div>
             <br />

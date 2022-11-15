@@ -15,6 +15,12 @@ export default function ListOfItems({ handleChangeMgmt }) {
         </ListItemIcon>
         <ListItemText primary="Boxes" />
       </ListItem>
+      <ListItem button onClick={() => handleChangeMgmt('boxPatterns')}>
+        <ListItemIcon>
+          <DashboardIcon />
+        </ListItemIcon>
+        <ListItemText primary="Box Patterns" />
+      </ListItem>
       <ListItem button onClick={() => handleChangeMgmt('brands')}>
         <ListItemIcon>
           <BarChartIcon />
