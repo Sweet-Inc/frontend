@@ -9,6 +9,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { useDispatch } from 'react-redux';
 import { addItem } from '../../features/cart/cartSlice';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea } from '@mui/material';
+import { flexbox } from '@mui/system';
 
 const GlobalStyles = createGlobalStyle`
 :root {
@@ -82,16 +88,14 @@ const BoxDetail = () => {
                   <h2>{box.boxPattern.name}</h2>
                   <div className="item_info_counts">
                     <div className="item_info_type">
-                      <i className="fa fa-image"></i>total product:{' '}
+                      <i className="fa fa-archive"></i>total product:{' '}
                       {box.boxProducts.length}
                     </div>
                     <div className="item_info_views">
-                      <i className="fa fa-eye"></i>price: {box.boxPattern.price}
+                      <i className="fa fa-money"></i>price: {box.boxPattern.price}
                       .000 VND
                     </div>
-                    <div className="item_info_like">
-                      <i className="fa fa-heart"></i>18
-                    </div>
+                   
                   </div>
 
                   <div className="author_list_info">
@@ -102,7 +106,7 @@ const BoxDetail = () => {
                         box.boxProducts.map((e) => e.product.brand.name)
                       ),
                     ].map((brand, index) => (
-                      <span key={index}>
+                      <span key={index} style={{fontSize: 20}}>
                         {' '}
                         {index !== 0 && '-'} {brand}{' '}
                       </span>
@@ -125,34 +129,61 @@ const BoxDetail = () => {
                 </div>
               </div>
             </div>
+           
           </section>
-
+                    
           {/* product show info */}
 
           <section className="container no-bottom">
+          <div className="item_info">
+                      <h2 style={{textDecoration: "underline"}}>Products: </h2>
+                    </div>
             <Slider {...sliderSettings}>
               {box &&
                 box.boxProducts.map((item) => (
-                  <div className="pattern_coll">
-                    <div className="nft_wraps">
-                      <span>
-                        <img
-                          src={item.product.image}
-                          className="lazy img-fluid"
-                          alt=""
-                        />
-                      </span>
-                    </div>
-                    <div className="nft_coll_info">
-                      <br />
-                      <span onClick={() => console.log('clicked')}>
-                        <h4>{item.product.name}</h4>
-                      </span>
-                      <span>quantity: {item.product.quantity} pack</span>
+                  <Card sx={{ maxWidth: 560, maxHeight : 400, display: 'inline-flex'}}>
+                    <CardActionArea>
+                      <CardMedia
+                        component="img"
+                        height="200"
+                        image={item.product.image}
+                        alt="green iguana"
+                      />
+                      <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                          {item.product.name}
+                        </Typography>
+                        {/* <Typography variant="subtitle1" color="text.secondary">
+                         quantity: {item.product.quantity-54}
+                        </Typography > */}
+                        <Typography variant="subtitle2" color="text.secondary" fontSize="20">
+                        <span>price: {item.product.price}.000 VND</span>
+                        </Typography >
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
 
-                      <span>price: {item.product.price}.000 VND</span>
-                    </div>
-                  </div>
+
+                  // <div className="pattern_coll">
+                  //   <div className="nft_wraps">
+                  //     <span>
+                  //       <img
+                  //         src={item.product.image}
+                  //         className="lazy img-fluid"
+                  //         alt=""
+                  //       />
+                  //     </span>
+                  //   </div>
+                  //   <div className="nft_coll_info">
+                  //     <br />
+                  //     <span onClick={() => console.log('clicked')}>
+                  //       <h4>{item.product.name}</h4>
+                  //     </span>
+                  //     <span>quantity: {item.product.quantity} pack</span>
+
+                  //     <span>price: {item.product.price}.000 VND</span>
+                  //   </div>
+                  // </div>
                 ))}
             </Slider>
           </section>
