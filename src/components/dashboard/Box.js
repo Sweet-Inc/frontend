@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
   seeMore: {
     marginTop: theme.spacing(3),
   },
+  textContent:{
+    display:'flex',
+    justifyContent:'center',
+  },
 }));
 
 export default function Box() {
@@ -56,31 +60,35 @@ export default function Box() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>From Age</TableCell>
-              <TableCell>To Age</TableCell>
-              <TableCell>Pattern Name</TableCell>
-              <TableCell>Status</TableCell>
-              <TableCell>Quantity</TableCell>
-              <TableCell align="center">Actions</TableCell>
+        <TableCell >ID</TableCell>
+        <TableCell >From Age</TableCell>
+        <TableCell >To Age</TableCell>
+        <TableCell >Pattern Name</TableCell>
+        <TableCell >Status</TableCell>
+        <TableCell >Quantity</TableCell>
+        <TableCell   align="center">Actions</TableCell>
             </TableRow>
           </TableHead>
+
           <TableBody>
             {data?.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
+                <TableCell >{item.id}</TableCell>
                 <TableCell>{item.lowerAge}</TableCell>
                 <TableCell>{item.upperAge}</TableCell>
                 <TableCell>{item.boxPattern.name}</TableCell>
                 <TableCell>{!item.status ? 'sold out' : 'available'}</TableCell>
                 <TableCell>{item.quantity}</TableCell>
-                <TableCell align="right">
-                  <div>
+                <TableCell  align="right">
+                  <div >
                     <EditModal
                       mgmtType="box"
                       dataItem={item}
                       handleEdit={handleEdit}
+
                     />
+                    {/* ký tự đặc biệt để cách ra */}
+                    <span>&nbsp;</span>
                     <Button
                       variant="contained"
                       color="secondary"

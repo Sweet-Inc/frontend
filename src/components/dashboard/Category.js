@@ -62,6 +62,7 @@ export default function Category() {
                       dataItem={item}
                       handleEdit={handleEditCategory}
                     />
+                    <span>&nbsp;</span>
                     <Button
                       variant="contained"
                       color="secondary"
