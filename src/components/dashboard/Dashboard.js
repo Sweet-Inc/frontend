@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -23,7 +23,8 @@ import BoxMgmt from './Box';
 import Category from './Category';
 import Brand from './Brand';
 import BoxPattern from './BoxPattern';
-
+import { getUser } from '../../firebase/data/currentUser';
+import { navigate } from '@reach/router';
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -122,6 +123,12 @@ export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const [currentMgmt, setCurrentMgmet] = React.useState('boxes');
+  const { res } = getUser();
+  useMemo(() => {
+    if (!res) {
+      window.location.replace('/');
+    }
+  }, []);
   const handleDrawerOpen = () => {
     setOpen(true);
   };

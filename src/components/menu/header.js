@@ -187,21 +187,7 @@ const Header = function () {
                 </div>
                 {openMenu3 && (
                   <div className="item-dropdown">
-                    <div className="dropdown" onClick={closeMenu3}>
-                      <NavLink
-                        to="/elegantIcons"
-                        onClick={() => btn_icon(!showmenu)}
-                      >
-                        Your profile
-                      </NavLink>
-                      <NavLink
-                        to="/etlineIcons"
-                        onClick={() => btn_icon(!showmenu)}
-                      >
-                        History
-                      </NavLink>
-                      <a onClick={handleLogout}>Logout</a>
-                    </div>
+                    <div></div>
                   </div>
                 )}
               </div>
