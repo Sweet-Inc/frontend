@@ -187,7 +187,9 @@ const Header = function () {
                 </div>
                 {openMenu3 && (
                   <div className="item-dropdown">
-                    <div></div>
+                    <div className="dropdown" onClick={closeMenu3}>
+                      <a onClick={handleLogout}>Logout</a>
+                    </div>
                   </div>
                 )}
               </div>
