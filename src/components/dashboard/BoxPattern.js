@@ -70,6 +70,8 @@ export default function BoxPattern() {
                       dataItem={item}
                       handleEdit={handleEdit}
                     />
+                    <span>&nbsp;</span>
+
                     <Button
                       variant="contained"
                       color="secondary"
